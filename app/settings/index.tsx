@@ -1,7 +1,26 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Alert } from "react-native";
 import { Link } from "expo-router";
-import { ArrowLeft, Moon, Sun, Monitor, Check } from "lucide-react-native";
+import {
+  ArrowLeft,
+  Moon,
+  Sun,
+  Monitor,
+  Check,
+  Bell,
+  ChevronRight,
+} from "lucide-react-native";
+import * as Notifications from "expo-notifications";
 import { useTheme } from "../../src/contexts/ThemeContext";
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
 
 type ThemeOption = "light" | "dark" | "system";
 
@@ -126,6 +145,7 @@ export default function SettingsScreen() {
           >
             Appearance
           </Text>
+
           {themeOptions.map((item) => (
             <ThemeButton
               key={item.option}
@@ -139,15 +159,59 @@ export default function SettingsScreen() {
           ))}
         </View>
 
-        {/* Placeholder for future settings */}
-        <View
-          className={`p-4 rounded-xl ${isDark ? "bg-gray-700" : "bg-white"}`}
-        >
+        {/* Dev Tools */}
+        <View className="mb-8">
           <Text
-            className={`text-sm ${isDark ? "text-gray-400" : "text-gray-500"}`}
+            className={`text-sm font-semibold uppercase tracking-wide mb-4 ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            }`}
           >
-            More settings coming soon...
+            Dev Tools
           </Text>
+
+          <View
+            className={`rounded-xl border border-dashed p-2 ${
+              isDark ? "border-gray-600" : "border-gray-300"
+            }`}
+          >
+            <Pressable
+              onPress={async () => {
+                const { status } = await Notifications.requestPermissionsAsync();
+                if (status !== "granted") {
+                  Alert.alert(
+                    "Permission required",
+                    "Enable notifications in system settings to use this test.",
+                  );
+                  return;
+                }
+                await Notifications.scheduleNotificationAsync({
+                  content: {
+                    title: "Test Notification",
+                    body: "This is a test push notification from Dev Tools.",
+                  },
+                  trigger: null,
+                });
+              }}
+              className={`flex-row items-center justify-between p-4 rounded-lg ${
+                isDark ? "active:bg-gray-700" : "active:bg-gray-200"
+              }`}
+            >
+              <View className="flex-row items-center">
+                <Bell size={20} color={isDark ? "#f9fafb" : "#1f2937"} />
+                <Text
+                  className={`ml-3 text-base font-medium ${
+                    isDark ? "text-gray-50" : "text-gray-800"
+                  }`}
+                >
+                  Send Push Notification
+                </Text>
+              </View>
+              <ChevronRight
+                size={18}
+                color={isDark ? "#9ca3af" : "#6b7280"}
+              />
+            </Pressable>
+          </View>
         </View>
       </View>
     </View>
