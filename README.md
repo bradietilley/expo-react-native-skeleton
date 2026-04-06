@@ -1,5 +1,9 @@
 # Expo Skeleton
 
+<p align="center">
+  <img src="assets/icon.png" alt="Icon featuring a colorful gradient serif letter S on a dark background" width="192" />
+</p>
+
 React Native app with Expo 54, NativeWind 4, and expo-router.
 
 ## Setup
