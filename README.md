@@ -31,6 +31,7 @@ Scan the QR code with Expo Go app.
 ## Assets
 
 Add these placeholder images to `/assets`:
+
 - `icon.png` (1024x1024)
 - `splash-icon.png` (512x512)
 - `adaptive-icon.png` (1024x1024)

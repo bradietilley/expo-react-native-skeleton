@@ -7,16 +7,11 @@ export default function Dashboard() {
   const { isDark } = useTheme();
 
   return (
-    <View
-      className={`flex-1 ${isDark ? "bg-gray-800" : "bg-gray-50"}`}
-    >
+    <View className={`flex-1 ${isDark ? "bg-gray-800" : "bg-gray-50"}`}>
       <View className="flex-row justify-end p-4 pt-14">
         <Link href="/settings" asChild>
           <Pressable className="p-2">
-            <Settings
-              size={24}
-              color={isDark ? "#f9fafb" : "#1f2937"}
-            />
+            <Settings size={24} color={isDark ? "#f9fafb" : "#1f2937"} />
           </Pressable>
         </Link>
       </View>

@@ -49,8 +49,8 @@ function ThemeButton({
             ? "bg-blue-600"
             : "bg-blue-500"
           : isDark
-          ? "bg-gray-700"
-          : "bg-white"
+            ? "bg-gray-700"
+            : "bg-white"
       }`}
     >
       <View className="flex-row items-center">
@@ -60,8 +60,8 @@ function ThemeButton({
             isSelected
               ? "text-white"
               : isDark
-              ? "text-gray-50"
-              : "text-gray-800"
+                ? "text-gray-50"
+                : "text-gray-800"
           }`}
         >
           {label}
@@ -75,7 +75,11 @@ function ThemeButton({
 export default function SettingsScreen() {
   const { theme, setTheme, isDark } = useTheme();
 
-  const themeOptions: { option: ThemeOption; label: string; icon: React.ReactNode }[] = [
+  const themeOptions: {
+    option: ThemeOption;
+    label: string;
+    icon: React.ReactNode;
+  }[] = [
     {
       option: "light",
       label: "Light Mode",
@@ -102,7 +106,9 @@ export default function SettingsScreen() {
       icon: (
         <Monitor
           size={22}
-          color={theme === "system" ? "#ffffff" : isDark ? "#f9fafb" : "#1f2937"}
+          color={
+            theme === "system" ? "#ffffff" : isDark ? "#f9fafb" : "#1f2937"
+          }
         />
       ),
     },
@@ -176,7 +182,8 @@ export default function SettingsScreen() {
           >
             <Pressable
               onPress={async () => {
-                const { status } = await Notifications.requestPermissionsAsync();
+                const { status } =
+                  await Notifications.requestPermissionsAsync();
                 if (status !== "granted") {
                   Alert.alert(
                     "Permission required",
@@ -206,10 +213,7 @@ export default function SettingsScreen() {
                   Send Push Notification
                 </Text>
               </View>
-              <ChevronRight
-                size={18}
-                color={isDark ? "#9ca3af" : "#6b7280"}
-              />
+              <ChevronRight size={18} color={isDark ? "#9ca3af" : "#6b7280"} />
             </Pressable>
           </View>
         </View>
